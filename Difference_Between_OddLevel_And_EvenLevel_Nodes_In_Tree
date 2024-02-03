@@ -1,0 +1,84 @@
+import java.util.*;
+public class Difference_Between_OddLevel_And_EvenLevel_Nodes_In_Tree {
+    static class Node{
+        int data ;
+        Node left ;
+        Node right ;
+        Node(int d){
+            data = d ;
+            left = null ;
+            right = null ;
+        }
+    }
+    Node root = null ;
+    public int difference_Between_OddLevel_And_EvenLevel_Nodes(){
+        int even_Level_Node_Sum = 0 ;
+        int odd_Level_Node_Sum= 0 ;
+        int current_Level_Number_Of_Nodes = 0 ;
+        Node current = null ;
+        int current_Level = 0 ;
+        int difference = 0 ;
+        if(root == null){
+            System.out.println("Tree is empty");
+        }
+        else{
+            Queue<Node> queue = new LinkedList<Node>() ;
+            queue.add(root);
+
+            while(queue.size() != 0){
+                current_Level ++ ;
+                current_Level_Number_Of_Nodes = queue.size();
+                while(current_Level_Number_Of_Nodes != 0){
+                     current = queue.remove() ;
+                     if(current_Level % 2 == 0){
+                         even_Level_Node_Sum = even_Level_Node_Sum + current.data ;
+                     }
+                     else{
+                         odd_Level_Node_Sum = odd_Level_Node_Sum + current.data ;
+                     }
+                     if(current.left != null){
+                         queue.add(current.left);
+                     }
+                     if(current.right != null){
+                         queue.add(current.right);
+                     }
+
+                    current_Level_Number_Of_Nodes-- ;
+                }
+                difference = Math.abs(odd_Level_Node_Sum - even_Level_Node_Sum) ;
+
+
+            }
+
+
+        }
+
+
+        return difference ;
+
+    }
+
+
+    public static void main(String [] args){
+        Difference_Between_OddLevel_And_EvenLevel_Nodes_In_Tree tree = new Difference_Between_OddLevel_And_EvenLevel_Nodes_In_Tree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.right.left = new Node(5);
+        tree.root.right.right = new Node(6);
+        tree.root.left.right = new Node(7);
+        tree.root.left.left.left = new Node(8);
+        tree.root.left.left.right = new Node(9);
+        tree.root.left.right.left = new Node(10);
+        tree.root.left.right.right = new Node(11);
+        tree.root.right.left.left = new Node(12);
+        tree.root.right.left.right = new Node(13);
+        tree.root.right.right.left  = new Node(14);
+        tree.root.right.right.right  = new Node(15);
+        tree.root.right.right.right.right  = new Node(10);
+        int m = tree.difference_Between_OddLevel_And_EvenLevel_Nodes() ;
+        System.out.println("Difference be "+ m) ;
+
+    }
+}
