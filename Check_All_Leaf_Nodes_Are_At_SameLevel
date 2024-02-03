@@ -1,0 +1,55 @@
+import java.lang.reflect.Array;
+import java.util.*;
+public class Check_All_Leaf_Nodes_Are_At_SameLevel {
+
+static class Node{
+    int data ;
+    Node left ;
+    Node right ;
+    Node(int d){
+        data = d ;
+    }
+ }
+ public Node root = null ;
+int level = 0;
+public boolean isAtSameLevel(Node node , int currentLevel){
+    if(root == null){
+        System.out.println("Tree is empty") ;
+        return true ;
+    }
+    else{
+        if(node == null){
+            return true ;
+        }
+       if(node.left == null && node.right == null){
+           if(level == 0){
+               level = currentLevel ;
+           }
+           else{
+               return(level == currentLevel);
+           }
+       }
+
+    }
+    return(isAtSameLevel(node.left , currentLevel+1) && isAtSameLevel(node.right, currentLevel+1)) ;
+}
+public static void main(String [] args){
+    Check_All_Leaf_Nodes_Are_At_SameLevel tree = new Check_All_Leaf_Nodes_Are_At_SameLevel() ;
+    tree.root = new Node(1);
+    tree.root.left = new Node(2);
+    tree.root.right = new Node(3) ;
+    tree.root.right.right = new Node(30) ;
+
+
+    if(tree.isAtSameLevel(tree.root,1) == true) {
+        System.out.println("Leaf nodes of tree are at same level");
+
+             }
+        else{
+            System.out.println("Tree leaf nodes are not at same level ");
+        }
+
+    }
+
+
+}
