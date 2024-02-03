@@ -1,0 +1,144 @@
+public class Binary_Search_Tree_Construction_InOrderTraversal_And_Deletion {
+    static class Node{
+        int data ;
+        Node left ;
+        Node right ;
+        Node(int d ){
+            data = d ;
+            left = null ;
+            right = null ;
+        }
+    }
+    Node root = null ;
+    public void Binary_Search_Tree_Construction(int data){
+        Node newNode = new Node(data);
+
+
+        if(root == null){
+            root = newNode ;
+        }
+        else{
+            Node current = root ;
+            Node parent = null ;
+
+           while(  true) {
+               parent = current ;
+               if (data < current.data) {
+                   current = current.left;
+                   if (current == null) {
+                       parent.left = newNode;
+                        return ;
+
+
+                   }
+
+               }
+               else{
+                   current = current.right ;
+                   if(current == null){
+                       parent.right = newNode ;
+                       return ;
+                   }
+               }
+
+               }
+
+
+           }
+
+
+    }
+    public Node minimum_Node(Node root){
+        Node min = null ;
+        if(root.left ==null) {
+              min =  root;
+        }
+
+        else {
+            root = minimum_Node(root.left);
+        }
+        return min ;
+
+
+    }
+    public Node element_Deletion(Node node ,int value){
+        if(node == null){
+            return null ;
+
+        }
+        else{
+            if(value < node.data){
+              node.left =  element_Deletion(node.left , value);
+            }
+            else if(value > node.data){
+               node.right = element_Deletion(node.right,value);
+            }
+            else{
+                if(node.left == null && node.right == null){
+                    node = null ;
+                }
+                else if(node.left == null    ){
+                    node = node.right ;
+                   node.right = null ;
+                }
+                else if(  node.right == null){
+                    node = node.left ;
+                   node.left = null ;
+
+                }
+                else{
+                    Node temp = minimum_Node(node.right);
+                    node.data = temp.data ;
+                   node.right =  element_Deletion(node.right,temp.data);
+                }
+
+            }
+            return node ;
+        }
+
+    }
+    public void Inorder_Traversal(Node node ){
+        if(root == null){
+            System.out.println("Tree is empty");
+            return ;
+        }
+        else{
+            Node current = node ;
+            if(current.left != null){
+                Inorder_Traversal(current.left);
+            }
+            System.out.print(current.data + " ");
+            if(current.right != null){
+                Inorder_Traversal(current.right);
+
+            }
+
+
+
+
+        }
+    }
+
+    public static void main(String [] args){
+        Binary_Search_Tree_Construction_InOrderTraversal_And_Deletion tree = new Binary_Search_Tree_Construction_InOrderTraversal_And_Deletion();
+
+        tree.Binary_Search_Tree_Construction(5);
+        tree.Binary_Search_Tree_Construction(10);
+        tree.Binary_Search_Tree_Construction(500);
+
+        tree.Binary_Search_Tree_Construction(60);
+
+        tree.Binary_Search_Tree_Construction(30);
+        tree.Binary_Search_Tree_Construction(90);
+        tree.Binary_Search_Tree_Construction(40);
+        tree.Binary_Search_Tree_Construction(70);
+        System.out.println("Original elements of tree be ");
+        tree.Inorder_Traversal(tree.root);
+        Node deletedNode = null ;
+        deletedNode = tree.element_Deletion(tree.root,90);
+        System.out.println();
+        System.out.println("Tree after deltion 500");
+       tree.Inorder_Traversal(tree.root);
+
+    }
+}
