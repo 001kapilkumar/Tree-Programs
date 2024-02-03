@@ -1,0 +1,106 @@
+import java.util.*;
+public class Two_Tress_Are_Identical {
+    static class Node{
+        int data ;
+        Node left = null ;
+        Node right = null ;
+        Node(int d ){
+            data = d ;
+            left = null ;
+            right = null ;
+        }
+    }
+    public Node root = null ;
+    public Node root1 = null ;
+    ArrayList<Integer> list1 = new ArrayList<Integer>() ;
+    ArrayList<Integer> list2 = new ArrayList<Integer>() ;
+
+
+    public void inorder_Traversal(Node node) {
+        if (root == null) {
+            System.out.println("Tree be empty");
+        } else {
+            if (node.left != null) {
+                inorder_Traversal(node.left);
+            }
+            System.out.print(node.data + " ");
+            list1.add(node.data);
+            if (node.right != null) {
+                inorder_Traversal(node.right);
+
+            }
+
+        }
+    }
+        public void second_Tree_inorder_Traversal(Node nod){
+            if(root == null){
+                System.out.println("Tree be empty");
+            }
+            else{
+                if(nod.left != null){
+                    second_Tree_inorder_Traversal(nod.left);
+                }
+                System.out.print(nod.data + " ") ;
+                list2.add(nod.data);
+                if(nod.right != null){
+                    second_Tree_inorder_Traversal(nod.right);
+
+                }
+
+            }
+          //  System.out.println("list2 size be " + list2.size());
+
+
+    }
+    public void identical_Tree(){
+        int a = 0;
+        if(list1.size() != list2.size()){
+            System.out.println("Trees are not identical") ;
+           // return false ;
+        }
+        else{
+            for(int i = 0; i<list1.size(); i++){
+                if(list1.get(i) == list2.get(i)){
+                   // return true ;
+                    a++ ;
+
+                }
+                else{
+                   a-- ;
+                }
+            }
+            if(a== list1.size()){
+                System.out.println("Identical trees");
+            }
+            else{
+                System.out.println("Not Identical Trees") ;
+            }
+
+        }
+        //System.out.println("a be " + a);
+       // System.out.println("list1 size be " + list1.size());
+       // System.out.println("list2 size be " + list2.size());
+
+    }
+
+    public static void main(String [] args){
+        Two_Tress_Are_Identical tree = new Two_Tress_Are_Identical();
+
+        tree.root = new Node(1);
+        tree.root.left = new Node(3);
+        tree.root.right = new Node(2) ;
+        System.out.println("First tree be ") ;
+        tree.inorder_Traversal(tree.root);
+        Two_Tress_Are_Identical tree2 = new Two_Tress_Are_Identical();
+        tree2.root = new Node(1);
+        tree2.root.left = new Node(3);
+        tree2.root.right = new Node(2 ) ;
+        System.out.println();
+        System.out.println("Second tree be") ;
+        tree. second_Tree_inorder_Traversal(tree2.root);
+        System.out.println();
+       tree.identical_Tree();
+
+
+    }
+}
