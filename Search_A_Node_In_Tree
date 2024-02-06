@@ -1,0 +1,68 @@
+import java.util.*;
+public class Search_A_Node_In_Tree {
+    static class Node{
+        int data ;
+        Node left ;
+        Node right ;
+        Node(int d){
+            data = d ;
+            left = null ;
+            right = null ;
+        }
+    }
+   // ArrayList<Node> list = new ArrayList<Node>() ;
+   ArrayList<Integer> list = new ArrayList<Integer>() ;
+    public Node root = null ;
+
+    public void inorder_Traversal(Node node){
+        if(root == null){
+            System.out.println("Tree be empty");
+
+        }
+        else{
+            if(node.left != null){
+                inorder_Traversal(node.left);
+            }
+            System.out.print(node.data + " ");
+            list.add(node.data) ;
+            if(node.right != null){
+                inorder_Traversal(node.right);
+            }
+        }
+
+    }
+
+    public boolean search_Element_In_Tree(int s){
+        Node search_node = new Node(s);
+        for(int i = 0; i<list.size() ; i++) {
+            if (s == list.get(i)) {
+                //  System.out.println("Element present in tree");
+                return true;
+            }
+        }
+
+        return false ;
+
+
+    }
+    public static void main(String [] args){
+        Search_A_Node_In_Tree tree = new Search_A_Node_In_Tree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+        tree.root.right.left = new Node(6);
+        tree.root.right.right = new Node(7);
+        System.out.println("Elements of tree be ");
+        tree.inorder_Traversal(tree.root);
+        System.out.println();
+        if(tree.search_Element_In_Tree(70) == true){
+            System.out.println("Element present in tree ");
+        }
+        else{
+            System.out.println("Element does not present in tree") ;
+        }
+
+    }
+}
