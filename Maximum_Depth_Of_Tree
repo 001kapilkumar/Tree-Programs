@@ -1,0 +1,56 @@
+import java.util.*;
+public class Maximum_Depth_Of_Tree {
+    static class Node{
+        int data ;
+        Node left ;
+        Node right ;
+        Node(int d){
+            data = d;
+            left = null ;
+            right = null;
+        }
+    }
+    public Node root = null ;
+
+
+
+    public int max_Depth(Node node){
+
+        if(root == null){
+            System.out.println("Tree be empty");
+            return 0 ;
+        }
+        else {
+            int leftHeight = 0 ;
+            int rightHeight = 0;
+            if(node.left != null){
+                leftHeight = max_Depth(node.left);
+            }
+            if(node.right != null){
+                rightHeight = max_Depth(node.right);
+            }
+             //int max = (leftHeight> rightHeight) ? leftHeight: rightHeight;
+            int max = Math.max(leftHeight, rightHeight) ;
+            return (max+1) ;
+        }
+
+
+    }
+    public static void main(String [] args){
+        Maximum_Depth_Of_Tree tree = new Maximum_Depth_Of_Tree();
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+         tree.root.right.left = new Node(5);
+        tree.root.right.right = new Node(6);
+       tree.root.right.right.right = new Node(7);
+       tree.root.right.right.right.right= new Node(8);
+       System.out.println("Depth be ") ;
+
+        System.out.println(tree.max_Depth(tree.root));
+
+
+
+    }
+}
