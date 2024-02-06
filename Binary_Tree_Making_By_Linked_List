@@ -1,0 +1,80 @@
+import java.util.*;
+
+public class Binary_Tree_Making_By_Linked_List {
+    static class Node{
+        int data ;
+        Node left = null ;
+        Node right = null ;
+        Node(int d){
+            data = d ;
+            left = null ;
+            right = null ;
+
+        }
+
+    }
+    public Node root = null ;
+    Queue<Node> queue = new LinkedList<Node>() ;
+    public void add_root(int n){
+        Node nod = new Node(n);
+        root = nod ;
+        queue.add(root);
+    }
+    public void insert_Node(int b, int c ){
+
+        Node node = new Node(b);
+        Node node1 = new Node(c);
+        int a = 0;
+            while(a != 1){
+                Node current = queue.remove() ;
+                if(current.left == null){
+                    current.left = node ;
+                    queue.add(node);
+                    //a=1 ;
+                }
+                 if(current.right == null){
+                    current.right = node1 ;
+                    queue.add(node1);
+                    a = 1 ;
+                }
+
+
+            }
+
+        }
+
+    public void inorder_Traversal(Node node){
+        if(root == null){
+            System.out.println("Tree be empty");
+        }
+        else{
+            if(node.left != null){
+                inorder_Traversal(node.left);
+            }
+            System.out.print(node.data + " ");
+            if(node.right != null){
+                inorder_Traversal(node.right);
+            }
+        }
+    }
+    public static void main(String [] args){
+        Binary_Tree_Making_By_Linked_List tree = new Binary_Tree_Making_By_Linked_List() ;
+        System.out.println("Root insertion ") ;
+        tree.add_root(1);
+        tree.inorder_Traversal(tree.root);
+        System.out.println();
+        System.out.println("First insertion be ") ;
+        tree.insert_Node(2,3);
+        tree.inorder_Traversal(tree.root);
+        System.out.println();
+        System.out.println("Second insertion be ") ;
+        tree.insert_Node(4,5);
+        tree.inorder_Traversal(tree.root);
+        System.out.println();
+        System.out.println("Third insertion be ") ;
+        tree.insert_Node(6,7);
+        tree.inorder_Traversal(tree.root);
+
+
+    }
+}
